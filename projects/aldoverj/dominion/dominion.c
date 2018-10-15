@@ -694,12 +694,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     {
     case adventurer:
 	return adventurerEffect(currentPlayer, state, drawntreasure, temphand, z);
-      }
-      while(z-1>=0){
-	state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; // discard all cards in play that have been drawn
-	z=z-1;
-      }
-      return 0;
 			
     case council_room:
       //+4 Cards
