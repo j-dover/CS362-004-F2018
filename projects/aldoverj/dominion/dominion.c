@@ -696,7 +696,7 @@ int councilRoomEffect(int player, struct gameState *state, int handPos)
   //Each other player draws a card
   for (int i = 0; i < state->numPlayers; i++)
     {
-      if ( i != player )
+      if ( i == player )
         {
           drawCard(i, state);
         }
