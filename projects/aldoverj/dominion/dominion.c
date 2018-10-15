@@ -671,6 +671,7 @@ int adventurerEffect(int player, struct gameState *state, int drawntreasure, int
 
 int smithyEffect(int player, struct gameState *state, int handPos)
 {
+  //+3 Cards
   for (int i = 0; i < 3; i++)
   {
     drawCard(player, state);
@@ -679,6 +680,42 @@ int smithyEffect(int player, struct gameState *state, int handPos)
   //discard card from hand
   discardCard(handPos, player, state, 0);
   return 0;
+}
+
+int councilRoomEffect(int player, struct gameState *state, int handPos)
+{
+  //+4 Cards
+  for (int i = 0; i < 4; i++)
+    {
+      drawCard(player, state);
+    }
+
+  //+1 Buy
+  state->numBuys++;
+
+  //Each other player draws a card
+  for (int i = 0; i < state->numPlayers; i++)
+    {
+      if ( i != player )
+        {
+          drawCard(i, state);
+        }
+    }
+
+  //put played card in played card pile
+  discardCard(handPos, player, state, 0);
+
+  return 0;  
+}
+
+int remodelEffect()
+{
+  
+}
+
+int villageEffect()
+{
+  
 }
 
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
@@ -704,31 +741,10 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   switch( card ) 
     {
     case adventurer:
-	return adventurerEffect(currentPlayer, state, drawntreasure, temphand, z);
+	    return adventurerEffect(currentPlayer, state, drawntreasure, temphand, z);
 			
     case council_room:
-      //+4 Cards
-      for (i = 0; i < 4; i++)
-	{
-	  drawCard(currentPlayer, state);
-	}
-			
-      //+1 Buy
-      state->numBuys++;
-			
-      //Each other player draws a card
-      for (i = 0; i < state->numPlayers; i++)
-	{
-	  if ( i != currentPlayer )
-	    {
-	      drawCard(i, state);
-	    }
-	}
-			
-      //put played card in played card pile
-      discardCard(handPos, currentPlayer, state, 0);
-			
-      return 0;
+      return councilRoomEffect(currentPlayer, state, handPos);
 			
     case feast:
       //gain card with cost up to 5
@@ -848,7 +864,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 		
     case smithy:
-      return smithyEffect(currentPlayer, state, handPos);	
+      return smithyEffect(currentPlayer, state, handPos);
+      	
     case village:
       //+1 Card
       drawCard(currentPlayer, state);
