@@ -132,5 +132,5 @@ int adventurerEffect(int player, struct gameState *state, int drawntreasure, int
 int smithyEffect(int player, struct gameState *state, int handPos);
 int councilRoomEffect(int player, struct gameState *state, int handPos);
 int remodelEffect(int player, struct gameState *state, int handPos, int choice1, int choice2);
-int villageEffect(int player, struct gameState *state, int handPos)
+int villageEffect(int player, struct gameState *state, int handPos);
 #endif
