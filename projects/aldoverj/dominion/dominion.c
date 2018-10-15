@@ -720,7 +720,7 @@ int remodelEffect(int player, struct gameState *state, int handPos, int choice1,
   gainCard(choice2, state, 0, player);
 
   //discard card from hand
-  discardCard(handPos, player, state, 0);
+  discardCard(handPos, player, state, 1);
 
   //discard trashed card
   for (int i = 0; i < state->handCount[player]; i++)
