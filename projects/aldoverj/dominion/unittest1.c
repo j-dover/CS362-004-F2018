@@ -18,16 +18,16 @@ void testUpdateCoins() {
 
 	/* Test Case: Expect 0 coins */
 	testBonus = 0;
-	if(testUpdateCoins(gameState->whoseTurn, testGameState, testBonus) == 0) {
+	if(testUpdateCoins(testGameState->whoseTurn, testGameState, testBonus) == 0) {
 		printf("updateCoins(): PASS when player 0's coins is 0, bonus is 0, all cards in hand are estate");
 	}
 	else {
-		printf("updateCoins(): FAIL when player 0 coins is 0, player 0 coins is 0, bonus is 0")
+		printf("updateCoins(): FAIL when player 0 coins is 0, player 0 coins is 0, bonus is 0");
 	}
 
 	/* Test Case: Expect 1 coins */
 	testGameState->hand[0][4] = copper;
-	if(testUpdateCoins(gameState->whoseTurn, testGameState, testBonus) == 1) {
+	if(testUpdateCoins(testGameState->whoseTurn, testGameState, testBonus) == 1) {
 		printf("updateCoins(): PASS when player 0's coins is 0, bonus is 0, one card is copper");
 	}
 	else {
@@ -36,7 +36,7 @@ void testUpdateCoins() {
 
 	/* Test Case: Expect 2 coins */
 	testGameState->hand[0][4] = silver;
-	if(testUpdateCoins(gameState->whoseTurn, testGameState, testBonus) == 2) {
+	if(testUpdateCoins(testGameState->whoseTurn, testGameState, testBonus) == 2) {
 		printf("updateCoins(): PASS when player 0's coins is 0, bonus is 0, one card is silver");
 	}
 	else {
@@ -45,7 +45,7 @@ void testUpdateCoins() {
 
 	/* Test Case: Expect 3 coins */
 	testGameState->hand[0][4] = gold;
-	if(testUpdateCoins(gameState->whoseTurn, testGameState, testBonus) == 3) {
+	if(testUpdateCoins(testGameState->whoseTurn, testGameState, testBonus) == 3) {
 		printf("updateCoins(): PASS when player 0's coins is 0, bonus is 0, one card is gold");
 	}
 	else {
@@ -58,7 +58,7 @@ void testUpdateCoins() {
 	testGameState->hand[0][2] = copper;
 	testGameState->hand[0][4] = estate;
 
-	if(testUpdateCoins(gameState->whoseTurn, testGameState, testBonus) == 3) {
+	if(testUpdateCoins(testGameState->whoseTurn, testGameState, testBonus) == 3) {
 		printf("updateCoins(): PASS when player 0's coins is 6, bonus is 0, hand has gold, silver, copper, and two estates");
 	}
 	else {
