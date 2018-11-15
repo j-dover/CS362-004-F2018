@@ -6,7 +6,7 @@
 #include "rngs.h"
 
 /*
- * randomtestadvenuter.c
+ * randomtestadventurer.c
  *
  *    
  */
@@ -14,8 +14,8 @@
 /*
  * Include the following lines in your makefile:
  *
- * cardtest4: cardtest4.c dominion.o rngs.o
- *      gcc -o cardtest1 -g  cardtest4.c dominion.o rngs.o $(CFLAGS)
+ * randomtestadventurer: randomtestadventurer.c dominion.o rngs.o
+ *      gcc -o randomtestadventurer -g  randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
  */
 
 int testAdventurer(int player, struct gameState *state, int drawntreasure, int *temphand, int z) {
