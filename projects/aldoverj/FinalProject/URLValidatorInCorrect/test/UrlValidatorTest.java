@@ -19,10 +19,10 @@ public class UrlValidatorTest extends TestCase {
 
    public void assertUrlTest(boolean expectedResult, boolean validatorResult, String urlInput) {
 	   if (java.util.Objects.equals(expectedResult, validatorResult)) {
-		   System.out.println("PASS Manual Test, URL: " + urlInput);
+		   System.out.println("PASS, URL: " + urlInput);
 	   }
 	   else {
-		   System.out.println("FAIL Manual Test, Expected Result: " + expectedResult + ", URL: " + urlInput);
+		   System.out.println("FAIL, Expected Result: " + expectedResult + ", URL: " + urlInput);
 	   }
    }
    
