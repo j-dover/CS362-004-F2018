@@ -193,10 +193,10 @@ public class UrlValidatorTest extends TestCase {
 	   int randomPathIndex;
 	   
 	   for (int i = 0; i < 1000; i++) {
-		   randomProtocolIndex = ran.nextInt(5);
-		   randomAuthorityIndex = ran.nextInt(5);
-		   randomPortIndex = ran.nextInt(5);
-		   randomPathIndex = ran.nextInt(5);
+		   randomProtocolIndex = ran.nextInt(protocol.length);
+		   randomAuthorityIndex = ran.nextInt(auth.length);
+		   randomPortIndex = ran.nextInt(port.length);
+		   randomPathIndex = ran.nextInt(path.length);
 		   urlInput = protocol[randomProtocolIndex] + auth[randomAuthorityIndex] + port[randomPortIndex] + path[randomPathIndex];
 		   validatorResult = urlVal.isValid(urlInput);
 		   assertUrlTest(expectedResult, validatorResult, urlInput);
