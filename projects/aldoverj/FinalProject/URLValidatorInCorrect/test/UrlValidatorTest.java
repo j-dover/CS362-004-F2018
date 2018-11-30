@@ -161,13 +161,13 @@ public class UrlValidatorTest extends TestCase {
 
    
    
-   
-   public void testYourSecondPartition(){
+   // testYourSecondPartition was not used because all of the partitions are in testYourFirstPartition
+/*   public void testYourSecondPartition(){
 		 //You can use this function to implement your Second Partition testing	   
 
    }
    //You need to create more test cases for your Partitions if you need to 
-   
+*/   
    public void testIsValid(){
 	   String protocol [] = {"http://","ftp://","https://"};
 	   String auth[] = {"newegg.com", "youtube.com", "reddit.com", "8.8.8.8", "gmail.com"};
