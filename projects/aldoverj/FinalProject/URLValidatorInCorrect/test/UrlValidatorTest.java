@@ -67,11 +67,100 @@ public class UrlValidatorTest extends TestCase {
    }
    
    
+   public void partitionTestValidator(UrlValidator urlTest, boolean[] expectedResults)
+   {
+      String[] testUrls = {"http://www.google.com",
+              "hcp://www.google.com",
+              "https://www.reddit.com/r/movies",
+              "https://www.reddit.com/r/movies#five",
+              "http://www.reddit.com//r/movies",
+              "www.google.com",
+              "ftp://localhost"};
+      boolean validatorResult;
+
+      for (int i = 0; i < testUrls.length; i++)
+      {
+         try
+         {
+            validatorResult = urlTest.isValid(testUrls[i]);
+            assertUrlTest(expectedResults[i], validatorResult, testUrls[i]);
+         }
+         catch (Error e)
+         {
+            System.out.println("Failed: " + e.getMessage());
+         }
+      }
+   }
+   
    public void testYourFirstPartition()
    {
-	 //You can use this function to implement your First Partition testing	   
+	 //You can use this function to implement your First Partition testing
+      String[] schemes = {"http",
+              "https",
+              "hcp",
+              "ftp"};
 
+      System.out.println("-- Partition Testing URLs --\n");
+
+      // Testing Basic URLValidator
+      System.out.println("-- Basic UrlValidator Test --");
+      UrlValidator urlTest1 = new UrlValidator();
+      boolean[] expectedResults1 = {true, false, true, true, false, false, false};
+      partitionTestValidator(urlTest1, expectedResults1);
+
+      // Testing URLValidator with custom schemes
+      System.out.println("\n-- UrlValidator with Schemes --");
+      UrlValidator urlTest2 = new UrlValidator(schemes);
+      boolean[] expectedResults2 = {true, true, true, true, false, false, false};
+      partitionTestValidator(urlTest2, expectedResults2);
+
+      // Testing URLValidator that allows all schemes
+      System.out.println("\n-- UrlValidator with ALLOW_ALL_SCHEMES option --");
+      UrlValidator urlTest3 = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+      boolean[] expectedResults3 = {true, true, true, true, false, false, false};
+      partitionTestValidator(urlTest3, expectedResults3);
+
+      // Testing URLValidator that allows 2 slashes in the URL path
+      System.out.println("\n-- UrlValidator with ALLOW_2_SLASHES option --");
+      UrlValidator urlTest4 = new UrlValidator(UrlValidator.ALLOW_2_SLASHES);
+      boolean[] expectedResults4 = {true, false, true, true, true, false, false};
+      partitionTestValidator(urlTest4, expectedResults4);
+
+      // Testing URLValidator that does not allow a fragment in the URL
+      System.out.println("\n-- UrlValidator with NO_FRAGMENTS option --");
+      UrlValidator urlTest5 = new UrlValidator(UrlValidator.NO_FRAGMENTS);
+      boolean[] expectedResults5 = {true, true, true, false, false, false, false};
+      partitionTestValidator(urlTest5, expectedResults5);
+
+      // Testing URLValidator that allows localhost
+      System.out.println("\n-- UrlValidator with ALLOW_LOCAL_URLS option --");
+      UrlValidator urlTest6 = new UrlValidator(UrlValidator.ALLOW_LOCAL_URLS);
+      boolean[] expectedResults6 = {true, true, true, true, false, false, true};
+      partitionTestValidator(urlTest6, expectedResults6);
+
+      // Testing URLValidator that does not allow a fragment in the URL with custom schemes
+      System.out.println("\n-- UrlValidator with Schemes and NO_FRAGMENTS option --");
+      UrlValidator urlTest7 = new UrlValidator(schemes, UrlValidator.NO_FRAGMENTS);
+      boolean[] expectedResults7 = {true, true, true, false, false, false, false};
+      partitionTestValidator(urlTest7, expectedResults7);
+
+      // Testing URLValidator that allows 2 slashes in the URL path with custom schemes
+      System.out.println("\n-- UrlValidator with Schemes and ALLOW_2_SLASHES option --");
+      UrlValidator urlTest8 = new UrlValidator(schemes, UrlValidator.ALLOW_2_SLASHES);
+      boolean[] expectedResults8 = {true, true, true, true, true, false, false};
+      partitionTestValidator(urlTest8, expectedResults8);
+
+      // Testing URLValidator that allows localhost with custom schemes
+      System.out.println("\n-- UrlValidator with Schemes and ALLOW_LOCAL_URLS option --");
+      UrlValidator urlTest9 = new UrlValidator(schemes, UrlValidator.ALLOW_LOCAL_URLS);
+      boolean[] expectedResults9 = {true, true, true, true, false, false, true};
+      partitionTestValidator(urlTest9, expectedResults9);
+
+      System.out.println("\n-- End Partition Testing --");
    }
+
+   
+   
    
    public void testYourSecondPartition(){
 		 //You can use this function to implement your Second Partition testing	   
@@ -108,8 +197,7 @@ public class UrlValidatorTest extends TestCase {
 		   randomAuthorityIndex = ran.nextInt(5);
 		   randomPortIndex = ran.nextInt(5);
 		   randomPathIndex = ran.nextInt(5);
-		   urlInput = protocol[randomProtocolIndex] + auth[randomAuthorityIndex] + 
-				   port[randomPortIndex] + path[randomPathIndex];
+		   urlInput = protocol[randomProtocolIndex] + auth[randomAuthorityIndex] + port[randomPortIndex] + path[randomPathIndex];
 		   validatorResult = urlVal.isValid(urlInput);
 		   assertUrlTest(expectedResult, validatorResult, urlInput);
 	   }
