@@ -71,7 +71,7 @@ void testGainCard() {
 		printf("PASS, gain adventurer \n");
 	}
 	else {
-		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount[0], ptr->deckCount[0]);
+		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount[adventurer], ptr->deckCount[0]);
 	}
 
 	
@@ -86,7 +86,7 @@ void testGainCard() {
 		printf("PASS, gained adventurer \n");
 	}
 	else {
-		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount[0], ptr->handCount[0]);
+		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount[adventurer], ptr->handCount[0]);
 	}
 
 
@@ -103,7 +103,7 @@ void testGainCard() {
 		printf("PASS, gain nothing to hand \n");
 	}
 	else {
-		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount[0], ptr->discardCount[0]);
+		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount[adventurer], ptr->discardCount[0]);
 	}
 }
 
