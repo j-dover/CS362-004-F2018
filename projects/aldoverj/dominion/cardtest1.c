@@ -30,7 +30,7 @@ void testSmithy(struct gameState *state) {
 
 	// Test Number of Cards Added in hand of 5
 	handCount = state->handCount[0]; 
-	state->hand[0][count] = smithy;
+	state->hand[0][handCount] = smithy;
 	state->handCount[0]++;
 
 	smithytest = smithyEffect(0, &state, 6);
@@ -47,7 +47,7 @@ void testSmithy(struct gameState *state) {
 
 	// Test Number of Cards Added in smaller deck of 2
 	handCount = state->handCount[0]; 
-	state->hand[0][count] = smithy;
+	state->hand[0][handCount] = smithy;
 	state->handCount[0]++;
 	smithytest = smithyEffect(0, &state, int handPos);
 	expectedHand = 9;
@@ -65,7 +65,6 @@ int main()
 	// test Smithy
 	struct gameState state;
 	int k[10] = {adventurer, village, council_room, mine, smithy, remodel, great_hall, outpost, gardens, feast};
-    int gainCardTest;
 	int seed = 2000;
 	int gameInit = initializeGame(2, k, seed, &state);	
 
