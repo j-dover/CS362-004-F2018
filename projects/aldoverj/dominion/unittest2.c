@@ -7,74 +7,104 @@
 
 int assertSupply(int expectedSupply, int card, struct gameState *state) {
 	int resultSupply = supplyCount(card, state);
-	if (expectedSupply != resultSupply){
-		return 0;	// False
-	}
-	else {
+	if (expectedSupply == resultSupply){
 		return 1;	// True
 	}
-}
-
-int assertGainCard(int expectedCard, int gainedCard) {
+	else {
+		return 0;	// False
+	}
 }
 
 int assertHandCount(int expectedHandCount, struct gameState *state) {
-	int resultHand = handCard();
+	int resultHand = state->handCount[0];
+    if (expectedHandCount == resultHand) {
+            return 1;       // True
+    }
+    else {
+            return 0;       // False
+    }	
 }
 
+int assertDiscardCount(int expectedCount, struct gameState *state) {
+	int result = state->discardCount[0];
+    if (expectedCount == result) {
+            return 1;       // True
+    }
+    else {
+            return 0;       // False
+    }	
+}
+
+int assertDeckCount(int expectedCount, struct gameState *state) {
+	int result = state->deckCount[0];
+    if (expectedCount == result) {
+            return 1;       // True
+    }
+    else {
+            return 0;       // False
+    }	
+} 
+
 void testGainCard() {
-	struct gameState testGame;
-	int k[10] = {adventurer, village, council_room, mine, smithy, remodel, great_hall, output, gardens, feast};
+	struct gameState state;
+	int k[10] = {adventurer, village, council_room, mine, smithy, remodel, great_hall, outpost, gardens, feast};
 	int expectedSupply, expectedCard, expectedCount;
-        int gainCardTest;
+    int gainCardTest;
+    struct gameState *ptr = &testGame;
+    int flag;
 	int seed = 2000;
 
-	int gameInit = initializeGame(2, k, seed, testGame);	
+	int gameInit = initializeGame(2, k, seed, state);	
 
 
 	// Test gainCard() in deck (flag 1)
 	printf("-- Test gainCard() to deck --\n");
 
-
-
 	// Gain kingdom card adventurer to deck
+	printf("-- Test gainCard() to hand --\n");	
+	ptr->supplyCount[adventurer] = 10;
+	flag = 1;
+	gainCardTest = gainCard(adventurer, &state, flag, 0);
+	expectedSupply = 10;
+	expectedCount = 5;
+	if (assertSupply(expectedSupply, adventurer, ptr) && assertDeckCount(expectedCount, ptr)) {
+		printf("PASS, gain adventurer \n");
+	}
+	else {
+		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount, ptr->deckCount);
+	}
 
-
-	// Gain treasure card to deck
-
-
-	// Gain curse to deck
-
-
-	// Gain victory to deck	
-	
 	
 	// Test gainCard() in hand
 	printf("-- Test gainCard() to hand --\n");	
+	ptr->supplyCount[adventurer] = 10;
+	flag = 2;
+	gainCardTest = gainCard(adventurer, &state, flag, 0);
+	expectedSupply = 9;
+	expectedCount = 6;
+	if (assertSupply(expectedSupply, adventurer, ptr) && assertHandCount(expectedCount, ptr)) {
+		printf("PASS, gained adventurer \n");
+	}
+	else {
+		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount, ptr->handCount);
+	}
 
 
-	// Gain nothing to hand because empty supply in Adventurer
-	testGame->supplyCount[adventurer] = 0;
-	gainCard(adventurer, &testGame, 2, 0);
+	// Test gainCard() in discard pile to simulate buying
+	printf("-- Test gainCard() to discard pile --\n");
+
+	// Gain nothing to discard pile because empty supply in Adventurer
+    ptr->supplyCount[adventurer] = 0;
+	flag = 0;
+	gainCardTest = gainCard(adventurer, &state, flag, 0);
 	expectedSupply = 0;
-	if (assertSupply()) {
+	expectedCount = 0;
+	if (assertSupply(expectedSupply, adventurer, ptr) && assertDiscardCount(expectedCount, ptr)) {
 		printf("PASS, gain nothing to hand \n");
 	}
 	else {
-		printf("FAIL, gained adventurer, supply count:%d", expectedSupply );
+		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount, ptr->discardCount);
 	}
-
-	// Gain kingdom Card adventurer to hand
-
-	
-	// Gain treasure to hand	
-
-
-	// Gain curse to hand
-
-	// Gain victory to hand
-
-	// Test gainCard() in discard
 }
 
 int main()
