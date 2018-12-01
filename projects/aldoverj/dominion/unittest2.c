@@ -50,11 +50,11 @@ void testGainCard() {
 	int k[10] = {adventurer, village, council_room, mine, smithy, remodel, great_hall, outpost, gardens, feast};
 	int expectedSupply, expectedCard, expectedCount;
     int gainCardTest;
-    struct gameState *ptr = &testGame;
+    struct gameState *ptr = &state;
     int flag;
 	int seed = 2000;
 
-	int gameInit = initializeGame(2, k, seed, state);	
+	int gameInit = initializeGame(2, k, seed, ptr);	
 
 
 	// Test gainCard() in deck (flag 1)
@@ -71,7 +71,7 @@ void testGainCard() {
 		printf("PASS, gain adventurer \n");
 	}
 	else {
-		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount, ptr->deckCount);
+		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount[0], ptr->deckCount[0]);
 	}
 
 	
@@ -86,7 +86,7 @@ void testGainCard() {
 		printf("PASS, gained adventurer \n");
 	}
 	else {
-		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount, ptr->handCount);
+		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount[0], ptr->handCount[0]);
 	}
 
 
@@ -103,7 +103,7 @@ void testGainCard() {
 		printf("PASS, gain nothing to hand \n");
 	}
 	else {
-		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount, ptr->discardCount);
+		printf("FAIL gaining adventurer, expected supply: %d, count: %d; result supply: %d, count: %d \n", expectedSupply, expectedCount, ptr->supplyCount[0], ptr->discardCount[0]);
 	}
 }
 
