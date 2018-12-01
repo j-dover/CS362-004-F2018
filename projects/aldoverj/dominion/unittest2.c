@@ -59,14 +59,12 @@ void testGainCard() {
 
 	// Test gainCard() in deck (flag 1)
 	printf("-- Test gainCard() to deck --\n");
-
 	// Gain kingdom card adventurer to deck
-	printf("-- Test gainCard() to hand --\n");	
 	ptr->supplyCount[adventurer] = 10;
 	flag = 1;
 	gainCardTest = gainCard(adventurer, &state, flag, 0);
-	expectedSupply = 10;
-	expectedCount = 5;
+	expectedSupply = 9;
+	expectedCount = 6;
 	if (assertSupply(expectedSupply, adventurer, ptr) && assertDeckCount(expectedCount, ptr)) {
 		printf("PASS, gain adventurer \n");
 	}
